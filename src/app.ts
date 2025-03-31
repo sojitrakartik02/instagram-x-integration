@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import express, { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import { connectDatabase } from './config/db';
@@ -8,6 +10,7 @@ import cors from 'cors';
 import helmet from 'helmet'
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
+
 
 dotenv.config();
 
