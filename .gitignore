@@ -1,0 +1,16 @@
+# Node.js dependencies
+node_modules/
+package-lock.json
+
+# TypeScript build output
+dist/
+build/
+
+# Environment variables
+.env
+
+# Logs
+logs/
+
+.git/
+.gitignore

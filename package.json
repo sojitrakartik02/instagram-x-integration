@@ -1,0 +1,36 @@
+{
+  "name": "instagram-x-integration",
+  "version": "1.0.0",
+  "description": "Backend Dev Assignment for Instagram & X.com Integration",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "nodemon src/server.ts",
+    "build": "swc src -d dist --source-maps --copy-files && tsc-alias",
+    "start": "npm run build && node dist/server.js",
+    "build:tsc": "tsc && tsc-alias"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "compression": "^1.8.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.21.2",
+    "helmet": "^8.1.0",
+    "i": "^0.3.7",
+    "mongoose": "^8.13.1",
+    "nodemon": "^3.1.9",
+    "npm": "^11.2.0",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/compression": "^1.7.5",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.4.1",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.0"
+  }
+}
