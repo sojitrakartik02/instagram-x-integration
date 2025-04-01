@@ -2,12 +2,13 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "CommonJS",
-    "outDir": "dist",
-    "rootDir": "src",
-    "strict": true,
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["jest", "mocha"]
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "baseUrl": "./src"
   },
-  "include": ["src/**/*", "tests/**/*"]
+  "include": ["src/**/*.ts", "tests/**/*.ts"]
 }

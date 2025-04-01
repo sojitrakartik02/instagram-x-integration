@@ -13,5 +13,6 @@ export class InstagramRoute {
     public initializeRoutes() {
 
         this.router.get(`${this.path}/fetch-post/:username`, this.instagramCOntroller.handleInstagramData);
+        this.router.post(`${this.path}/post-tweet`, this.instagramCOntroller.postTweet);
     }
 }

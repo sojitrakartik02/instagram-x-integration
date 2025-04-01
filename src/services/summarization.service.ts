@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Logger } from "../utils/logger";
 import { Service } from 'typedi'
 
 
@@ -8,20 +7,29 @@ export class summarizationService {
 
     public async summarizeCaption(caption: string): Promise<string> {
         try {
-            const response = await axios.post("https://api.openai.com/v1/engines/text-davinci-003/completions", {
-                prompt: `Summarize this caption for a tweet: "${caption}"`,
-                max_tokens: 280,
-            }, {
-                headers: {
-                    "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+            const response = await axios.post(
+                "https://api.cohere.ai/v1/generate",
+                {
+                    model: "command",
+                    prompt: `Summarize for Twitter: ${caption}`,
+                    max_tokens: 50
                 },
-            });
+                {
+                    headers: {
+                        Authorization: `Bearer ${process.env.COHERE_API_KEY}`,
+                        "Content-Type": "application/json"
+                    }
+                }
+            );
 
-            return response.data.choices[0].text.trim();
+            console.log("Response from Cohere:", response.data);
+
+            return response.data.generations[0].text.trim();
         } catch (error: any) {
-            Logger.error("Error summarizing caption: ", error);
+            console.error("Error summarizing caption: ", error.response?.data || error.message);
             throw new Error("Failed to summarize caption.");
         }
-    };
+    }
+
 
 }

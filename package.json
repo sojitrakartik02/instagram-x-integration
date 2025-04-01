@@ -11,11 +11,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "axios": "^1.4.0",
+    "@ai-sdk/xai": "^1.2.5",
+    "axios": "^1.8.4",
     "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "helmet": "^8.1.0",
     "i": "^0.3.7",
@@ -23,13 +24,16 @@
     "nodemon": "^3.1.9",
     "npm": "^11.2.0",
     "reflect-metadata": "^0.2.2",
+    "twitter-api-v2": "^1.22.0",
     "typedi": "^0.10.0",
-    "winston": "^3.17.0"
+    "winston": "^3.17.0",
+    "xai": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-typescript": "^7.27.0",
+    "@types/axios": "^0.14.4",
     "@types/chai": "^5.2.1",
     "@types/compression": "^1.7.5",
     "@types/cookie-parser": "^1.4.8",
