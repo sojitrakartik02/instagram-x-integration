@@ -19,7 +19,39 @@ export class xComService {
             accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET!,
         });
 
-        this.rwClient = this.client.readWrite; 
+        this.rwClient = this.client.readWrite;
+    }
+
+
+
+    public async fetchUserTweets(username: string, maxResults: number = 5) {
+        try {
+
+            const user = await this.rwClient.v2.userByUsername(username);
+            console.log("User details:", user);
+
+
+            const tweets = await this.rwClient.v2.userTimeline(user.data.id, { max_results: maxResults });
+            console.log(tweets)
+            return {
+                userDetails: user.data,
+                tweets: tweets.data,
+                meta: tweets.meta  
+            };
+        } catch (error: any) {
+            if (error.code === 429) {
+                const resetTime = error.response?.headers['x-rate-limit-reset'];
+                const retryAfter = (resetTime - Math.floor(Date.now() / 1000)) * 1000;
+                console.log(`Rate limit exceeded. Retrying after ${retryAfter / 1000} seconds.`);
+                setTimeout(() => {
+                    this.fetchUserTweets(username, maxResults);
+                }, retryAfter);
+            } else {
+                console.error("Error fetching tweets:", error.message);
+                throw new Error("Failed to fetch tweets.");
+            }
+        }
+
     }
 
     public async postTweet(summarizedCaption: string, imageUrl: string | null = null) {
@@ -35,7 +67,10 @@ export class xComService {
             }
 
             const response = await this.rwClient.v2.tweet(tweetParams);
+            const userDetails = await this.rwClient.v2.me();
+            console.log("userDetails.data.username", userDetails.data.username);
             console.log("Tweet posted successfully:", response);
+
             return response;
         } catch (error: any) {
             Logger.error("Error posting tweet to X.com:", error);

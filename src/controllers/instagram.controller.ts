@@ -6,25 +6,23 @@ import Container from "typedi";
 
 
 
-export class instagramCOntroller {
+
+export class instagramController {
     public instagramService = Container.get(instagramService)
     public summarizeService = Container.get(summarizationService)
     public xcomService = Container.get(xComService)
 
 
-    public handleInstagramData = async (req: Request, res: Response,next:NextFunction) => {
+    public handleTweeterData = async (req: Request, res: Response, next: NextFunction) => {
         const { username } = req.params;
 
         try {
-            const instagramData = await this.instagramService.fetchInstagramData(username);
-
-            const summarizedCaption = await this.summarizeService.summarizeCaption(instagramData.caption);
-
-            const tweetResponse = await this.xcomService.postTweet(summarizedCaption, instagramData.imageUrl);
+            const instagramData = await this.xcomService.fetchUserTweets(username);
 
             res.json({
-                message: "Tweet posted successfully",
-                tweetResponse,
+                message: "Tweet Fetch successfully",
+
+                instagramData
             });
         } catch (error) {
             next(error)
